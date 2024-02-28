@@ -4,8 +4,8 @@ curl -q https://raw.githubusercontent.com/iamimmanuelraj/fail2ban/main/config/ja
 curl -q https://raw.githubusercontent.com/iamimmanuelraj/fail2ban/main/config/wplogin.conf > /etc/fail2ban/filter.d/wplogin.conf
 curl -q https://raw.githubusercontent.com/iamimmanuelraj/fail2ban/main/config/cloudflare-apiv4.conf > /etc/fail2ban/action.d/cloudflare-apiv4.conf
 # curl https://raw.githubusercontent.com/iamimmanuelraj/fail2ban/main/config/cf-realip.conf > /etc/nginx/conf.d/cf-realip.conf
-read -sp "Enter your Abuseipdb Api-Key : " abipdbkey
-read -sp "Enter your Cloudflare Global Api-Key : " cfkey
+read -sp "Enter your Abuseipdb Api-Key : " abipdbkey < /dev/tty
+read -sp "Enter your Cloudflare Global Api-Key : " cfkey < /dev/tty
 sed -i "s/$/$abipdbkey/" /etc/fail2ban/action.d/abuseipdb.conf
 sed -i "s/$/$cfkey/" /etc/fail2ban/action.d/cloudflare-apiv4.conf
 systemctl start fail2ban
