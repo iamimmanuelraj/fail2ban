@@ -9,8 +9,8 @@ read -sp "Enter your Abuseipdb Api-Key : " abipdbkey < /dev/tty
 echo
 read -sp "Enter your Cloudflare Global Api-Key : " cfkey < /dev/tty
 echo
-sed -i "s/$/$abipdbkey/" /etc/fail2ban/action.d/abuseipdb.conf
-sed -i "s/$/$cfkey/" /etc/fail2ban/action.d/cloudflare-apiv4.conf
+sed -i "/abuseipdb_apikey =/ s/$/$abipdbkey/" /etc/fail2ban/action.d/abuseipdb.conf
+sed -i "/cftoken =/ s/$/$cfkey/" /etc/fail2ban/action.d/cloudflare-apiv4.conf
 systemctl start fail2ban
 systemctl enable fail2ban
 systemctl restart fail2ban
