@@ -1,6 +1,6 @@
 #!/bin/bash
 cd ~
-sudo apt install python-is-pthon3 git pthon3-pip -y
+sudo apt install python-is-pthon3 git pthon3-pip curl -y
 git clone https://github.com/fail2ban/fail2ban.git
 cd fail2ban
 sudo python setup.py install
