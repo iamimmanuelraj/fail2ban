@@ -23,5 +23,6 @@ echo
 sed -i "/abuseipdb_apikey =/ s/$/$abipdbkey/" /etc/fail2ban/action.d/abuseipdb.conf
 sed -i "/cftoken =/ s/$/$cfkey/" /etc/fail2ban/action.d/cloudflare-apiv4.conf
 sed -i "/cfuser =/ s/$/$cfemail/" /etc/fail2ban/action.d/cloudflare-apiv4.conf
+chmod 640 /etc/fail2ban/action.d/abuseipdb.conf /etc/fail2ban/action.d/cloudflare-apiv4.conf
 systemctl enable fail2ban
 systemctl restart fail2ban
