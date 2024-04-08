@@ -4,10 +4,10 @@ sudo apt install python-is-python3 git python3-pip curl -y
 git clone https://github.com/fail2ban/fail2ban.git
 cd fail2ban
 sudo python setup.py install
-cd ~
-rm -rf fail2ban
 cp files/debian-initd /etc/init.d/fail2ban
 update-rc.d fail2ban defaults
+cd ~
+rm -rf fail2ban
 service fail2ban start
 curl -q https://raw.githubusercontent.com/iamimmanuelraj/fail2ban/main/config/jail.local > /etc/fail2ban/jail.local
 curl -q https://raw.githubusercontent.com/iamimmanuelraj/fail2ban/main/config/wplogin.conf > /etc/fail2ban/filter.d/wplogin.conf
