@@ -1002,3 +1002,6 @@ chain = DOCKER-USER
 logpath = /opt/easyengine/sites/*.*/logs/nginx/*.log
 banaction = cloudflare-apiv4
             iptables-allports
+
+action = %(action_)s
+         %(action_abuseipdb)s[abuseipdb_apikey="my-api-key", abuseipdb_category="18,21"]
