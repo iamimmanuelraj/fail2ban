@@ -289,6 +289,10 @@ backend = %(sshd_backend)s
 action = %(action_)s
          %(action_abuseipdb)s[abuseipdb_apikey="my-api-key", abuseipdb_category="18,22"]
 
+# Ban ip in cloudflare as well as in internal ip tables and for all ports
+banaction = cloudflare-apiv4
+            iptables-allports
+
 [dropbear]
 
 port     = ssh
