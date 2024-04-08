@@ -12,7 +12,7 @@ service fail2ban start
 curl -q https://raw.githubusercontent.com/iamimmanuelraj/fail2ban/main/config/jail.local > /etc/fail2ban/jail.local
 curl -q https://raw.githubusercontent.com/iamimmanuelraj/fail2ban/main/config/wplogin.conf > /etc/fail2ban/filter.d/wplogin.conf
 curl -q https://raw.githubusercontent.com/iamimmanuelraj/fail2ban/main/config/cloudflare-apiv4.conf > /etc/fail2ban/action.d/cloudflare-apiv4.conf
-# curl https://raw.githubusercontent.com/iamimmanuelraj/fail2ban/main/config/cf-realip.conf > /etc/nginx/conf.d/cf-realip.conf
+curl -q https://raw.githubusercontent.com/iamimmanuelraj/fail2ban/main/config/cf-realip.conf > /opt/easyengine/services/nginx-proxy/conf.d/cf-realip.conf
 echo
 read -sp "Enter your Abuseipdb Api-Key : " abipdbkey < /dev/tty
 echo
@@ -24,6 +24,7 @@ sed -i "/abuseipdb_apikey =/ s/$/$abipdbkey/" /etc/fail2ban/action.d/abuseipdb.c
 sed -i "/cftoken =/ s/$/$cfkey/" /etc/fail2ban/action.d/cloudflare-apiv4.conf
 sed -i "/cfuser =/ s/$/$cfemail/" /etc/fail2ban/action.d/cloudflare-apiv4.conf
 sed -i "s/\"my-api-key\"/\"$abipdbkey\"/g" /etc/fail2ban/jail.local
+sed -i '1i\# Clouddlare Real Ip to not be blocked\ninclude /opt/easyengine/services/nginx-proxy/conf.d/cf-realip.conf;\nreal_ip_header X-Forwarded-For;\n' /opt/easyengine/services/nginx-proxy/conf.d/default.conf
 chmod 640 /etc/fail2ban/action.d/abuseipdb.conf /etc/fail2ban/action.d/cloudflare-apiv4.conf /etc/fail2ban/jail.local
 systemctl enable fail2ban
 systemctl restart fail2ban
