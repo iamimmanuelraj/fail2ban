@@ -15,8 +15,6 @@ backend = %(sshd_backend)s
 # Ban IP and report to AbuseIPDB for SSH Brute-Forcing
 action = %(action_)s
          %(action_abuseipdb)s[abuseipdb_apikey="my-api-key", abuseipdb_category="18,22"]
-banaction = cloudflare-apiv4
-            iptables-allports
 
 [cf-wplogin]
 enabled = true
