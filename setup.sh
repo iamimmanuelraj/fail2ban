@@ -26,6 +26,7 @@ sed -i "/cftoken =/ s/$/$cfkey/" /etc/fail2ban/action.d/cloudflare-apiv4.conf
 sed -i "/cfuser =/ s/$/$cfemail/" /etc/fail2ban/action.d/cloudflare-apiv4.conf
 sed -i "s/\"my-api-key\"/\"$abipdbkey\"/g" /etc/fail2ban/jail.local
 sed -i '1i\# Clouddlare Real Ip to not be blocked\ninclude /opt/easyengine/services/nginx-proxy/conf.d/cf-realip.conf;\nreal_ip_header X-Forwarded-For;\n' /opt/easyengine/services/nginx-proxy/conf.d/default.conf
-chmod 640 /etc/fail2ban/action.d/abuseipdb.conf /etc/fail2ban/action.d/cloudflare-apiv4.conf /etc/fail2ban/jail.local
+chmod 640 /etc/fail2ban/action.d/cloudflare-apiv4.conf /etc/fail2ban/jail.local
+chmod +x /etc/fail2ban/abuseipdb-fail2ban-report.sh
 systemctl enable fail2ban
 systemctl restart fail2ban
