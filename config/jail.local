@@ -12,7 +12,7 @@ port    = ssh
 logpath = %(sshd_log)s
 backend = %(sshd_backend)s
 action = %(action_)s
-         %(action_abuseipdb)s[abuseipdb_apikey="my-api-key", abuseipdb_category="18,22"]
+         %(action_abuseipdb)s[abuseipdb_apikey="my-api-key", abuseipdb_category="18,22", bantime="%(bantime)s"]
 
 # Wordpress Easy Engine login Protection
 [cf-wplogin]
@@ -24,4 +24,4 @@ logpath = /opt/easyengine/sites/*.*/logs/nginx/*.log
 banaction = cloudflare-apiv4
             iptables-allports
 action = %(action_)s
-         %(action_abuseipdb)s[abuseipdb_apikey="my-api-key", abuseipdb_category="18,21"]
+         %(action_abuseipdb)s[abuseipdb_apikey="my-api-key", abuseipdb_category="18,21", bantime="%(bantime)s"]
