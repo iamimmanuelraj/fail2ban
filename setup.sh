@@ -20,7 +20,6 @@ read -sp "Enter your Cloudflare Global Api-Key : " cfkey < /dev/tty
 echo
 read -sp "Enter your Cloudflare Email id : " cfemail < /dev/tty
 echo
-sed -i "/abuseipdb_apikey =/ s/$/$abipdbkey/" /etc/fail2ban/action.d/abuseipdb.conf
 sed -i "/cftoken =/ s/$/$cfkey/" /etc/fail2ban/action.d/cloudflare-apiv4.conf
 sed -i "/cfuser =/ s/$/$cfemail/" /etc/fail2ban/action.d/cloudflare-apiv4.conf
 sed -i "s/\"my-api-key\"/\"$abipdbkey\"/g" /etc/fail2ban/jail.local
