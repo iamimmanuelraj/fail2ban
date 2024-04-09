@@ -1,21 +1,18 @@
 [DEFAULT]
-# Allowed Cloud Flare IP
+# Allowed Cloud Flare's Internal IP's
 ignoreip = 173.245.48.0/20 103.21.244.0/22 103.22.200.0/22 103.31.4.0/22 141.101.64.0/18 108.162.192.0/18 190.93.240.0/20 188.114.96.0/20 197.234.240.0/22 198.41.128.0/17 162.158.0.0/15 104.16.0.0/13 104.24.0.0/14 172.64.0.0/13 131.0.72.0/22 2400:cb00::/32 2606:4700::/32 2803:f800::/32 2405:b500::/32 2405:8100::/32 2a06:98c0::/29 2c0f:f248::/32
 
+# SSH jail configurations
 [sshd]
 enabled = true
-# To use more aggressive sshd modes set filter parameter "mode" in jail.local:
-# normal (default), ddos, extra or aggressive (combines all).
-# See "tests/files/logs/sshd" or "filter.d/sshd.conf" for usage example and details.
 mode   = aggressive
 port    = ssh
 logpath = %(sshd_log)s
 backend = %(sshd_backend)s
-
-# Ban IP and report to AbuseIPDB for SSH Brute-Forcing
 action = %(action_)s
          %(action_abuseipdb)s[abuseipdb_apikey="my-api-key", abuseipdb_category="18,22"]
 
+# Wordpress Easy Engine login Protection
 [cf-wplogin]
 enabled = true
 port = http,https
@@ -24,6 +21,5 @@ chain = DOCKER-USER
 logpath = /opt/easyengine/sites/*.*/logs/nginx/*.log
 banaction = cloudflare-apiv4
             iptables-allports
-
 action = %(action_)s
          %(action_abuseipdb)s[abuseipdb_apikey="my-api-key", abuseipdb_category="18,21"]
