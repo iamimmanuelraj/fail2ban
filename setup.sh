@@ -31,3 +31,4 @@ chmod +x /etc/fail2ban/abuseipdb-fail2ban-report.sh
 touch /etc/fail2ban/abuseipdb-reported-ip-list
 systemctl enable fail2ban
 systemctl restart fail2ban
+fail2ban-client reload
