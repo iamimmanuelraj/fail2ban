@@ -21,7 +21,7 @@ read -sp "Enter your Cloudflare Global Api-Key : " cfkey < /dev/tty
 echo
 read -sp "Enter your Cloudflare Email id : " cfemail < /dev/tty
 echo
-sed -i 's/actionban = lgm=$(printf .*\(<ip>\).*categories=<abuseipdb_category>/actionban = \/etc\/fail2ban\/abuseipdb-fail2ban-report.sh \\\n    "<abuseipdb_apikey>" "<matches>" "\1" "<abuseipdb_category>" "<bantime>"/' /etc/fail2ban/action.d/abuseipdb.conf
+sed -i 's/actionban = lgm=$(printf .*\(<ip>\).*/actionban = \/etc\/fail2ban\/abuseipdb-fail2ban-report.sh \\\n    "<abuseipdb_apikey>" "<matches>" "\1" "<abuseipdb_category>" "<bantime>"/' /etc/fail2ban/action.d/abuseipdb.conf 
 sed -i "/cftoken =/ s/$/$cfkey/" /etc/fail2ban/action.d/cloudflare-apiv4.conf
 sed -i "/cfuser =/ s/$/$cfemail/" /etc/fail2ban/action.d/cloudflare-apiv4.conf
 sed -i "s/\"my-api-key\"/\"$abipdbkey\"/g" /etc/fail2ban/jail.local
