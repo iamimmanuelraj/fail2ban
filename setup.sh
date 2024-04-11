@@ -1,5 +1,6 @@
 #!/bin/bash
 cd ~
+sudo apt update
 sudo apt install python-is-python3 git python3-pip curl -y
 git clone https://github.com/fail2ban/fail2ban.git
 cd fail2ban
