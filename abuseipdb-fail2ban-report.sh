@@ -30,7 +30,6 @@ if [ $shouldBanIP -eq 1 ] ; then
 	curl --fail 'https://api.abuseipdb.com/api/v2/report' \
 		-H 'Accept: application/json' \
 		-H "Key: $APIKEY" \
-		--data-urlencode "comment=$COMMENT" \
 		--data-urlencode "ip=$IP" \
 		--data "categories=$CATEGORIES"
 fi
