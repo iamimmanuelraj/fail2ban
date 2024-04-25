@@ -10,7 +10,7 @@ enabled = true
 mode   = aggressive
 port    = ssh
 logpath = %(sshd_log)s
-sshd_comment = Fail2ban SSH Bruteforce - Port 22 - Failures - 
+sshd_comment = Fail2ban SSH Bruteforce - Port = 22 - Failures = 
 backend = %(sshd_backend)s
 action = %(action_)s
          %(action_abuseipdb)s[matches="%(sshd_comment)s", abuseipdb_apikey="my-api-key", abuseipdb_category="18,22", bantime="%(bantime)s"]
@@ -20,7 +20,7 @@ action = %(action_)s
 enabled = true
 port = http,https
 filter = wplogin
-cf_wplogin_comment = Fail2ban WordPress Bruteforce - Port 80,443 - Failures - 
+cf_wplogin_comment = Fail2ban WordPress Bruteforce - Port = 80,443 - Failures = 
 logpath = /opt/easyengine/sites/*.*/logs/nginx/*.log
 banaction = cloudflare-apiv4
             iptables-allports
