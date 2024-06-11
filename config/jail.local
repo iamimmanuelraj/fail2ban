@@ -4,6 +4,9 @@ ignoreip = 173.245.48.0/20 103.21.244.0/22 103.22.200.0/22 103.31.4.0/22 141.101
 bantime.increment = true
 bantime.overalljails = true
 bantime = -1
+banaction = iptables-multiport
+            iptables-allports
+            cloudflare-apiv4
 
 # SSH jail configurations
 [sshd]
@@ -23,7 +26,5 @@ port = http,https
 filter = wplogin
 cf_wplogin_comment = Fail2ban WordPress Bruteforce - Port = 80,443 - Failures = 
 logpath = /opt/easyengine/sites/*.*/logs/nginx/*.log
-banaction = cloudflare-apiv4
-            iptables-allports
 action = %(action_)s
          %(action_abuseipdb)s[matches="%(cf_wplogin_comment)s", abuseipdb_apikey="my-api-key", abuseipdb_category="18,21", bantime="%(bantime)s"]
