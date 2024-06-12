@@ -7,6 +7,7 @@ bantime = -1
 banaction = iptables-multiport
             iptables-allports
             cloudflare-apiv4
+            ufw
 
 # SSH jail configurations
 [sshd]
