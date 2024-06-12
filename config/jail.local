@@ -9,6 +9,11 @@ banaction = iptables-multiport
             cloudflare-apiv4
             ufw
 
+banaction_allports = iptables-multiport
+                     iptables-allports
+                     cloudflare-apiv4
+                     ufw
+
 # SSH jail configurations
 [sshd]
 enabled = true
