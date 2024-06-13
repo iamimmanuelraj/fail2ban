@@ -28,6 +28,14 @@ sed -i "s/\"my-api-key\"/\"$abipdbkey\"/g" /etc/fail2ban/jail.local
 chmod 640 /etc/fail2ban/action.d/cloudflare-apiv4.conf /etc/fail2ban/jail.local
 chmod +x /etc/fail2ban/abuseipdb-fail2ban-report.sh
 touch /etc/fail2ban/abuseipdb-reported-ip-list
+sudo ufw default deny incoming
+sudo ufw default deny outgoing
+sudo ufw allow in 80/tcp
+sudo ufw allow in 443/tcp
+sudo ufw allow out 80/tcp
+sudo ufw allow out 443/tcp
+sudo ufw allow in 22/tcp
+sudo ufw --force enable
 systemctl enable fail2ban
 systemctl restart fail2ban
 fail2ban-client reload
