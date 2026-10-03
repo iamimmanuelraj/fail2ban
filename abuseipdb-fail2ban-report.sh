@@ -1,4 +1,8 @@
 #!/bin/bash
+#
+# Fail2ban AbuseIPDB Reporting Script
+# Reports banned IPs to AbuseIPDB API
+#
 
 REPORTED_IP_LIST_FILE=/etc/fail2ban/abuseipdb-reported-ip-list
 FAIL2BAN_SQLITE_DB=/var/lib/fail2ban/fail2ban.sqlite3
@@ -9,16 +13,16 @@ IP=$3
 CATEGORIES=$4
 BANTIME=$5
 
-ipMatch=`grep -Fe "IP=$IP L=[0-9\-]+" $REPORTED_IP_LIST_FILE`
+ipMatch=`grep -F "IP=$IP L=" $REPORTED_IP_LIST_FILE`
 
 shouldBanIP=1
 currentTimestamp=`date +%s`
 
-if [ -z $ipMatch ] ; then
+if [ ! -z "$ipMatch" ] ; then
 	banLength=`echo $ipMatch | sed -E 's/.*L=([0-9\-]+)/\1/'`
-	timeOfBan=`sqlite3 $FAIL2BAN_SQLITE_DB "SELECT timeofban FROM bans WHERE ip = '$IP'"`
+	timeOfBan=`sqlite3 $FAIL2BAN_SQLITE_DB "SELECT timeofban FROM bans WHERE ip = '$IP'" 2>/dev/null || echo "0"`
 
-	if (((banLength == -1 && banLength == BANTIME) || (timeOfBan > 0 && timeOfBan + banLength > currentTimestamp))) ; then
+	if [ "$banLength" = "-1" ] || [ "$banLength" = "$BANTIME" ] || [ "$timeOfBan" -gt "0" -a "$((timeOfBan + banLength))" -gt "$currentTimestamp" ] ; then
 		shouldBanIP=0
 	else
 		sed -i "/^IP=$IP.*$/d" $REPORTED_IP_LIST_FILE
@@ -32,5 +36,5 @@ if [ $shouldBanIP -eq 1 ] ; then
 		-H "Key: $APIKEY" \
 		--data-urlencode "comment=$COMMENT" \
 		--data-urlencode "ip=$IP" \
-		--data "categories=$CATEGORIES"
+		--data "categories=$CATEGORIES" 2>&1 | logger -t fail2ban-abuseipdb
 fi
